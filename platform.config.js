@@ -18,21 +18,12 @@ window.PLATFORM_CONFIG = {
     },
   },
 
-  /* ---------- Cores (apenas cores são mutáveis) ---------- */
+  /* ---------- Cores ----------
+     Apenas DUAS cores são editáveis por cliente. Tudo o mais (fundo
+     branco, textos em preto/cinza, bordas) é fixo — ver README.md. */
   colors: {
-    headerBg: "#F5F5F5",
-    headerBorder: "#E0E0E0",
-    headerText: "#1A1A1A",
-    searchBg: "#FFFFFF",
-    searchBorder: "#D6D6D6",
-    searchPlaceholder: "#8A8A8A",
-    iconColor: "#1A1A1A",
-    buttonBg: "#1A1A1A",
-    buttonText: "#FFFFFF",
-    pageBg: "#FFFFFF",
-    sectionTitle: "#1A1A1A",
-    sectionAccent: "#1A1A1A", // a forma 8x20 ao lado do título
-    cardTitle: "#FFFFFF",
+    primary: "#1A1A1A",       // botão do header + botão "Iniciar" (SEMPRE a mesma cor nos dois)
+    sectionAccent: "#1A1A1A", // ícone/forma 8x20 ao lado do título da sessão
   },
 
   /* ---------- Header (textos fixos, apenas rótulos) ---------- */

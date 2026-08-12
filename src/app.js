@@ -5,21 +5,13 @@
   const cfg = window.PLATFORM_CONFIG;
   if (!cfg) throw new Error("platform.config.js não foi carregado.");
 
-  /* ---------- cores ---------- */
+  /* ---------- cores ----------
+     Só estas duas são editáveis por cliente. Qualquer outra chave em
+     colors é ignorada de propósito — fundo, textos e bordas são fixos
+     e vivem apenas em src/styles.css. Ver README.md. */
   const COLOR_VARS = {
-    headerBg: "--c-header-bg",
-    headerBorder: "--c-header-border",
-    headerText: "--c-header-text",
-    searchBg: "--c-search-bg",
-    searchBorder: "--c-search-border",
-    searchPlaceholder: "--c-search-placeholder",
-    iconColor: "--c-icon",
-    buttonBg: "--c-button-bg",
-    buttonText: "--c-button-text",
-    pageBg: "--c-page-bg",
-    sectionTitle: "--c-section-title",
+    primary: "--c-primary",
     sectionAccent: "--c-section-accent",
-    cardTitle: "--c-card-title",
   };
 
   const root = document.documentElement;
@@ -89,7 +81,35 @@
       cardTitle.className = "card__title";
       cardTitle.textContent = lesson.title;
 
-      card.append(img, cardTitle);
+      const actions = document.createElement("div");
+      actions.className = "card__actions";
+
+      const startBtn = document.createElement("span");
+      startBtn.className = "card__start";
+      startBtn.textContent = "Iniciar";
+
+      const likeBtn = document.createElement("button");
+      likeBtn.type = "button";
+      likeBtn.className = "card__like";
+      likeBtn.setAttribute("aria-label", "Favoritar aula");
+      likeBtn.setAttribute("aria-pressed", "false");
+      likeBtn.innerHTML =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2S3.5 15.3 3.5 9.3A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 2.9c0 6-8.5 10.9-8.5 10.9z"/></svg>';
+      likeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const pressed = likeBtn.getAttribute("aria-pressed") === "true";
+        likeBtn.setAttribute("aria-pressed", String(!pressed));
+        likeBtn.classList.toggle("is-liked", !pressed);
+      });
+
+      actions.append(startBtn, likeBtn);
+
+      const body = document.createElement("div");
+      body.className = "card__body";
+      body.append(cardTitle, actions);
+
+      card.append(img, body);
       row.append(card);
     });
 
