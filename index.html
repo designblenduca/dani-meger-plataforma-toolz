@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plataforma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER (IMUTÁVEL) ===================== -->
+  <header class="header">
+    <a class="header__logo" href="/" aria-label="Início">
+      <img id="brand-logo" src="assets/logo/logo.svg" alt="" />
+    </a>
+
+    <div class="header__actions">
+      <div class="search">
+        <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="16.5" y1="16.5" x2="21" y2="21" />
+        </svg>
+        <input id="search-input" class="search__input" type="search" placeholder="Pesquisar" aria-label="Pesquisar" />
+      </div>
+
+      <a id="cart-link" class="cart" href="#" aria-label="Carrinho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="20" r="1.4" />
+          <circle cx="18" cy="20" r="1.4" />
+          <path d="M2 3h2.2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h9.3a1.5 1.5 0 0 0 1.5-1.2L21 7H5.2" />
+        </svg>
+      </a>
+
+      <a id="header-cta" class="header__cta" href="#">Entrar</a>
+    </div>
+  </header>
+
+  <!-- ===================== BANNER (1440x800) ===================== -->
+  <div class="banner">
+    <img id="banner-img" src="assets/banner/banner.jpg" alt="" />
+  </div>
+
+  <!-- ===================== SESSÕES DE AULAS ===================== -->
+  <main id="sections" class="sections"></main>
+
+  <script src="platform.config.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

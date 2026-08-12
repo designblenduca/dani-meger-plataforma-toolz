@@ -1,0 +1,315 @@
+/* =============================================================
+ * ESTRUTURA IMUTÁVEL — não altere medidas, gaps ou tamanhos.
+ * Somente as variáveis de cor (--c-*) são sobrescritas por cliente
+ * (injetadas em runtime a partir de platform.config.js).
+ * ============================================================= */
+
+/* ---------- Tokens estruturais (IMUTÁVEIS) ---------- */
+:root {
+  --header-h: 68px;
+  --page-pad: 48px;
+
+  --search-w: 320px;
+  --search-h: 42px;
+  --header-gap: 20px;
+
+  --btn-h: 36px;
+  --btn-pad-x: 16px;
+  --btn-radius: 6px;
+
+  --banner-h: 800px;
+
+  --section-gap: 80px;      /* entre sessões e banner→1ª sessão */
+  --title-to-cards: 24px;   /* título → pilha de aulas */
+  --card-gap: 12px;         /* entre aulas */
+
+  --card-h-w: 400px;        /* capa horizontal */
+  --card-h-h: 190px;
+  --card-v-w: 334px;        /* capa vertical */
+  --card-v-h: 508px;
+
+  --card-pad-x: 16px;
+  --card-pad-y: 19px;
+  --card-radius: 4px;
+
+  /* Cores default (neutro: preto, branco, tons de cinza) */
+  --c-header-bg: #f5f5f5;
+  --c-header-border: #e0e0e0;
+  --c-header-text: #1a1a1a;
+  --c-search-bg: #ffffff;
+  --c-search-border: #d6d6d6;
+  --c-search-placeholder: #8a8a8a;
+  --c-icon: #1a1a1a;
+  --c-button-bg: #1a1a1a;
+  --c-button-text: #ffffff;
+  --c-page-bg: #ffffff;
+  --c-section-title: #1a1a1a;
+  --c-section-accent: #1a1a1a;
+  --c-card-title: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--c-page-bg);
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* compensa o header fixo: banner encosta no header, sem gap */
+  padding-top: var(--header-h);
+}
+
+img { display: block; }
+
+/* =============================================================
+ * HEADER — IMUTÁVEL (só logo e cores mudam)
+ * ============================================================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--page-pad);
+  background: var(--c-header-bg);
+  border-bottom: 1px solid var(--c-header-border);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-right: auto;      /* empurra o bloco da direita */
+  text-decoration: none;
+}
+
+/* altura fixa definida no config; largura variável (auto) */
+.header__logo img {
+  width: auto;
+  max-width: 320px;
+  object-fit: contain;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--header-gap);
+  flex: 0 0 auto;
+}
+
+/* --- barra de pesquisa: SEMPRE igual --- */
+.search {
+  position: relative;
+  width: var(--search-w);
+  height: var(--search-h);
+  flex: 0 0 var(--search-w);
+}
+
+.search__icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--c-icon);
+  pointer-events: none;
+}
+
+.search__input {
+  width: 100%;
+  height: 100%;
+  padding: 0 16px 0 44px;
+  border: 1px solid var(--c-search-border);
+  border-radius: calc(var(--search-h) / 2);
+  background: var(--c-search-bg);
+  color: var(--c-header-text);
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1;
+  outline: none;
+}
+
+.search__input::placeholder { color: var(--c-search-placeholder); }
+.search__input:focus { border-color: var(--c-icon); }
+
+/* --- carrinho: SEMPRE igual --- */
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--c-icon);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+.cart svg { width: 24px; height: 24px; }
+
+/* --- botão: SEMPRE igual --- */
+.header__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-h);
+  padding: 0 var(--btn-pad-x);
+  border-radius: var(--btn-radius);
+  background: var(--c-button-bg);
+  color: var(--c-button-text);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 0;
+  cursor: pointer;
+}
+
+/* =============================================================
+ * BANNER — 100% da largura, 800px de altura fixa
+ * ============================================================= */
+.banner {
+  width: 100%;
+  height: var(--banner-h);
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =============================================================
+ * SESSÕES DE AULAS
+ * ============================================================= */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);        /* 80px entre sessões */
+  padding-top: var(--section-gap); /* 80px entre banner e 1ª sessão */
+  padding-bottom: var(--section-gap);
+}
+
+.section__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 var(--page-pad);
+  margin-bottom: var(--title-to-cards); /* 24px */
+}
+
+/* forma 8x20, radius 6px só à direita */
+.section__accent {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 20px;
+  border-radius: 0 6px 6px 0;
+  background: var(--c-section-accent);
+}
+
+.section__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--c-section-title);
+}
+
+/* pilha horizontal de aulas — desliza (slide) apenas quando o conteúdo
+   excede a largura disponível; os cards ficam sempre alinhados à
+   esquerda com o título da sessão. */
+.section__viewport {
+  position: relative;
+}
+
+/* área visível: recorta o conteúdo, mesmo padding do título */
+.section__clip {
+  overflow: hidden;
+  padding: 0 var(--page-pad);
+}
+
+/* trilho que efetivamente desliza (translateX) */
+.section__row {
+  display: flex;
+  gap: var(--card-gap);            /* 12px */
+  width: max-content;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(0);
+}
+
+/* setas de navegação — inseridas via JS somente quando há overflow */
+.section__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-button-bg);
+  color: var(--c-button-text);
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0.95;
+}
+.section__nav svg { width: 20px; height: 20px; }
+.section__nav:disabled { opacity: 0; pointer-events: none; }
+
+.section__nav--prev { left: 8px; }
+.section__nav--next { right: 8px; }
+
+/* =============================================================
+ * CARDS DE AULA
+ * ============================================================= */
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;          /* título na parte de baixo */
+  justify-content: flex-start;    /* alinhado à esquerda */
+  padding: var(--card-pad-y) var(--card-pad-x); /* 19px / 16px */
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  text-decoration: none;
+  scroll-snap-align: start;
+  background: #111;
+}
+
+.card--horizontal { width: var(--card-h-w); height: var(--card-h-h); }
+.card--vertical   { width: var(--card-v-w); height: var(--card-v-h); }
+
+.card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.card__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  color: var(--c-card-title);
+  /* drop shadow bem marcado */
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 4px 12px rgba(0, 0, 0, 0.75);
+}
