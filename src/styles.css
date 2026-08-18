@@ -24,8 +24,6 @@
   --btn-pad-x: 16px;
   --btn-radius: 6px;
 
-  --banner-h: 800px;
-
   --section-gap: 80px;      /* entre sessões e banner→1ª sessão */
   --title-to-cards: 24px;   /* título → pilha de aulas */
   --card-gap: 12px;         /* entre aulas */
@@ -183,11 +181,12 @@ img { display: block; }
 }
 
 /* =============================================================
- * BANNER — 100% da largura, 800px de altura fixa
+ * BANNER — 100% da largura, altura proporcional à largura da tela
+ * (referência: 1440x800 → razão 1440:800)
  * ============================================================= */
 .banner {
   width: 100%;
-  height: var(--banner-h);
+  aspect-ratio: 1440 / 800;
   overflow: hidden;
 }
 
