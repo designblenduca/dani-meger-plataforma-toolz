@@ -322,6 +322,27 @@ img { display: block; }
   z-index: 0;
 }
 
+/* véu na cor da marca sobre a capa — some sessões trazem fotos/artes
+   heterogêneas (tons, temas, contraste distintos entre si); o véu
+   funde tudo sob --c-primary para a capa ler como parte da mesma
+   identidade, sem alterar a imagem em si. Só existe quando a sessão
+   define coverTint: true no config. */
+.card__tint {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--c-primary);
+  mix-blend-mode: color;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* reforço multiply sutil por cima: aprofunda sombras e evita que a
+   fusão "color" deixe a capa lavada, mantendo o contraste do título */
+.card--tint .card__img {
+  filter: saturate(0.85);
+}
+
 /* bloco de conteúdo: título + ações, ambos animados no hover */
 .card__body {
   position: relative;

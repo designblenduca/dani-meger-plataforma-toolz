@@ -68,7 +68,7 @@
 
     (section.lessons || []).forEach((lesson) => {
       const card = document.createElement("a");
-      card.className = "card card--" + layout;
+      card.className = "card card--" + layout + (section.coverTint ? " card--tint" : "");
       card.href = lesson.href || "#";
 
       const img = document.createElement("img");
@@ -76,6 +76,12 @@
       img.src = lesson.cover;
       img.alt = "";
       img.loading = "lazy";
+
+      const tint = section.coverTint ? document.createElement("span") : null;
+      if (tint) {
+        tint.className = "card__tint";
+        tint.setAttribute("aria-hidden", "true");
+      }
 
       const cardTitle = document.createElement("h3");
       cardTitle.className = "card__title";
@@ -109,7 +115,8 @@
       body.className = "card__body";
       body.append(cardTitle, actions);
 
-      card.append(img, body);
+      if (tint) card.append(img, tint, body);
+      else card.append(img, body);
       row.append(card);
     });
 
