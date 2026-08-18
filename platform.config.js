@@ -1,5 +1,6 @@
 /* =============================================================
  * PLATFORM CONFIG — o único arquivo que você edita por cliente.
+ * Cliente: Meger — Clínica Financeira (Mentoria Método MMD)
  * =============================================================
  * Tudo aqui é MUTÁVEL. A estrutura do layout (header, banner,
  * cards, gaps) é IMUTÁVEL e vive em src/styles.css.
@@ -8,12 +9,11 @@
 window.PLATFORM_CONFIG = {
   /* ---------- Identidade ---------- */
   brand: {
-    name: "Lorem Ipsum Platform",
-    /* Logo: altura e largura livres. Coloque o arquivo em assets/logo/.
-       O header reserva 68px de altura; recomenda-se logo com até 40px de altura. */
+    name: "Meger — Clínica Financeira",
+    /* Lockup MEGER em SVG vetorial — nítido em qualquer resolução/zoom. */
     logo: {
       src: "assets/logo/logo.svg",
-      alt: "Logo do cliente",
+      alt: "Meger — Clínica Financeira",
       height: 34, // px — largura é automática (proporcional)
     },
   },
@@ -22,8 +22,8 @@ window.PLATFORM_CONFIG = {
      Apenas DUAS cores são editáveis por cliente. Tudo o mais (fundo
      branco, textos em preto/cinza, bordas) é fixo — ver README.md. */
   colors: {
-    primary: "#1A1A1A",       // botão do header + botão "Iniciar" (SEMPRE a mesma cor nos dois)
-    sectionAccent: "#1A1A1A", // ícone/forma 8x20 ao lado do título da sessão
+    primary: "#B8863B",       // dourado da marca — botão do header + botão "Iniciar"
+    sectionAccent: "#B8863B", // ícone/forma 8x20 ao lado do título da sessão
   },
 
   /* ---------- Header (textos fixos, apenas rótulos) ---------- */
@@ -35,57 +35,64 @@ window.PLATFORM_CONFIG = {
   },
 
   /* ---------- Banner ----------
-     Imagem 1440x800px exportada do Figma, salva em assets/banner/.
-     Preenche 100% da largura da página, altura fixa de 800px. */
+     Imagem 1440x800px, salva em assets/banner/. */
   banner: {
     src: "assets/banner/banner.jpg",
-    alt: "Banner da plataforma",
+    alt: "Bem-vindo à Mente Médica Milionária",
   },
 
   /* ---------- Sessões de aulas ----------
      layout: "horizontal" (cards 400x190) ou "vertical" (cards 334x508).
-     Uma sessão NUNCA mistura os dois tipos. */
+     Uma sessão NUNCA mistura os dois tipos.
+     As capas em assets/covers/ já vêm exportadas no tamanho exato de
+     cada layout — não redimensione nem recorte.
+     coverTint: true aplica um véu na cor --c-primary (color-mix) sobre
+     as capas da sessão, para unificar fotos/artes heterogêneas dentro
+     da identidade da marca. Use nas sessões com capas mais soltas;
+     omita nas que já têm identidade visual própria (ex.: capas de
+     livro). */
   sections: [
     {
-      title: "Lorem ipsum dolor sit amet",
+      title: "Boas-vindas",
       layout: "horizontal",
+      coverTint: true, // capas variadas (foto/abstrato) → tinge com --c-primary p/ harmonizar com a marca
       lessons: [
-        { title: "Consectetur adipiscing", cover: "https://picsum.photos/seed/h1/800/380", href: "#" },
-        { title: "Sed do eiusmod tempor", cover: "https://picsum.photos/seed/h2/800/380", href: "#" },
-        { title: "Incididunt ut labore", cover: "https://picsum.photos/seed/h3/800/380", href: "#" },
-        { title: "Et dolore magna aliqua", cover: "https://picsum.photos/seed/h4/800/380", href: "#" },
-        { title: "Ut enim ad minim", cover: "https://picsum.photos/seed/h5/800/380", href: "#" },
+        { title: "Boas-Vindas", cover: "assets/covers/01-boas-vindas.png", href: "#" },
+        { title: "Método MMD", cover: "assets/covers/02-metodo-mmd.png", href: "#" },
+        { title: "Ferramenta (Tutorial)", cover: "assets/covers/03-ferramenta.png", href: "#" },
+        { title: "Cronograma / Materiais de Apoio", cover: "assets/covers/04-cronograma.png", href: "#" },
       ],
     },
     {
-      title: "Ut enim ad minim veniam",
+      title: "Finanças Comportamentais - Método MMD",
+      layout: "vertical",
+      coverTint: true,
+      lessons: [
+        { title: "Desvendando suas Finanças: O Caminho para o Autoconhecimento", cover: "assets/covers/05-autoconhecimento.png", href: "#" },
+        { title: "Rumo à Liberdade Financeira: Negociação e Gestão de Riscos", cover: "assets/covers/06-negociacao.png", href: "#" },
+        { title: "Construindo Futuros: Planejamento de Metas de Médio Prazo", cover: "assets/covers/07-medio-prazo.png", href: "#" },
+        { title: "Sonhos em Ação: Estrategizando Metas de Longo Prazo", cover: "assets/covers/08-longo-prazo.png", href: "#" },
+      ],
+    },
+    {
+      title: "4 pilares",
+      layout: "horizontal",
+      coverTint: true,
+      lessons: [
+        { title: "Fase 1 – Fundamentos (Clareza e Organização)", cover: "assets/covers/09-fase-1-fundamentos.png", href: "#" },
+        { title: "Fase 2 – Planejamento e Gestão (Previsibilidade Financeira)", cover: "assets/covers/10-fase-2-planejamento.png", href: "#" },
+        { title: "Fase 3 – Gestão de Clientes (CX) (Previsibilidade de Receita)", cover: "assets/covers/11-fase-3-clientes.png", href: "#" },
+        { title: "Fase 4 – Expansão e Extratégia (Crescimento com Controle)", cover: "assets/covers/12-fase-4-expansao.png", href: "#" },
+      ],
+    },
+    {
+      title: "Análise de Livros",
       layout: "vertical",
       lessons: [
-        { title: "Quis nostrud exercitation", cover: "https://picsum.photos/seed/v1/668/1016", href: "#" },
-        { title: "Ullamco laboris nisi", cover: "https://picsum.photos/seed/v2/668/1016", href: "#" },
-        { title: "Aliquip ex ea commodo", cover: "https://picsum.photos/seed/v3/668/1016", href: "#" },
-        { title: "Duis aute irure dolor", cover: "https://picsum.photos/seed/v4/668/1016", href: "#" },
-        { title: "Reprehenderit in voluptate", cover: "https://picsum.photos/seed/v5/668/1016", href: "#" },
-      ],
-    },
-    {
-      title: "Excepteur sint occaecat",
-      layout: "horizontal",
-      lessons: [
-        { title: "Cupidatat non proident", cover: "https://picsum.photos/seed/h6/800/380", href: "#" },
-        { title: "Sunt in culpa qui officia", cover: "https://picsum.photos/seed/h7/800/380", href: "#" },
-        { title: "Deserunt mollit anim", cover: "https://picsum.photos/seed/h8/800/380", href: "#" },
-        { title: "Id est laborum", cover: "https://picsum.photos/seed/h9/800/380", href: "#" },
-      ],
-    },
-    {
-      title: "Sed ut perspiciatis unde omnis",
-      layout: "vertical",
-      lessons: [
-        { title: "Iste natus error sit", cover: "https://picsum.photos/seed/v6/668/1016", href: "#" },
-        { title: "Voluptatem accusantium", cover: "https://picsum.photos/seed/v7/668/1016", href: "#" },
-        { title: "Doloremque laudantium", cover: "https://picsum.photos/seed/v8/668/1016", href: "#" },
-        { title: "Totam rem aperiam", cover: "https://picsum.photos/seed/v9/668/1016", href: "#" },
+        { title: "Rápido e Devagar", cover: "assets/covers/13-rapido-e-devagar.png", href: "#" },
+        { title: "Casal Inteligente Enriquece Juntos", cover: "assets/covers/14-casal-inteligente.png", href: "#" },
+        { title: "O Homem Mais Rico da Babilônia", cover: "assets/covers/15-babilonia.png", href: "#" },
+        { title: "Pai Rico e Pai Pobre", cover: "assets/covers/16-pai-rico-pai-pobre.png", href: "#" },
       ],
     },
   ],
